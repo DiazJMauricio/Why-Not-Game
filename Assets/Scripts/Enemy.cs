@@ -137,18 +137,6 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    ///     Funcion Disparar() y sobrecargas.
-
-    /*public void Disparar(float time, GameObject objeto) {
-        personalTimer = Mathf.Round(personalTimer * 100) / 100;
-        if (personalTimer == time) {
-            GameObject bullet1 = Instantiate(objeto).gameObject;
-            //  Estable la posicion y la rotacion del objeto instanciado.
-            bullet1.transform.position = this.transform.position;
-            bullet1.tag = "EnemyBullet";
-            //bullet1.GetComponent<Enemy>().PadreStar();
-        }
-    }*/
     public void Disparar(float time, GameObject bullet,Transform pos, float rotacion = 0) {
         if (_controlDisparo(time)) {
             rotacion = _presisarRotacion(rotacion);
@@ -156,59 +144,27 @@ public class Enemy : MonoBehaviour {
             _setPositionYRotacionEnemyBullet(objeto,rotacion, pos);
         }
     }
-    
-    bool _controlDisparo(float time) {
-        personalTimer = Mathf.Round(personalTimer * 100) / 100;
-        time = Mathf.Round(time * 100) / 100;
-        return (personalTimer == time);
-    }
-    float _presisarRotacion(float r) {
-        if (inversionY < 0) r += (180 - r) * 2;
-        if (inversionX < 0) r += (180 - r) * 2 + 180;
-        return r;
-    }
-    GameObject _InstanciarEnemyBullet(GameObject go) {
-        GameObject objetoInstanciado = Instantiate(go).gameObject;
-        objetoInstanciado.tag = "EnemyBullet";
-        return objetoInstanciado;
-    }
-    void _setPositionYRotacionEnemyBullet(GameObject bullet,float rotacion, Transform position) {
-        bullet.transform.position = position.position;
-        bullet.transform.rotation = Quaternion.Euler(0, 0, rotacion);
-    }
-    
-    /*
-    public void Disparar(float rotacion, float time, GameObject objeto) {
-        personalTimer = Mathf.Round(personalTimer * 100) / 100;
-        if (personalTimer == time) {
-            if (inversionY < 0) rotacion += (180 - rotacion) * 2;
-            if (inversionX < 0) rotacion += (180 - rotacion) * 2 + 180;
-
-            GameObject bullet1 = Instantiate(objeto).gameObject;
-            bullet1.tag = "EnemyBullet";
-            //  Estable la posicion y la rotacion del objeto instanciado.
-            bullet1.transform.position = this.transform.position;
-            bullet1.transform.rotation = Quaternion.Euler(0, 0, rotacion);
-            //bullet1.GetComponent<Enemy>().PadreStar();
+        /// funciones para Disparo
+        bool _controlDisparo(float time) {
+            personalTimer = Mathf.Round(personalTimer * 100) / 100;
+            time = Mathf.Round(time * 100) / 100;
+            return (personalTimer == time);
         }
-    }
-    public void Disparar(float rotacion, float time, GameObject objeto, Transform arma) {
-        personalTimer = Mathf.Round(personalTimer * 100) / 100;
-        if (personalTimer == time)
-        {
-            if (inversionY < 0) rotacion += (180 - rotacion) * 2;
-
-            if (inversionX < 0) rotacion += (180 - rotacion) * 2 + 180;
-
-            GameObject bullet1 = Instantiate(objeto).gameObject;
-            bullet1.tag = "EnemyBullet";
-            //  Estable la posicion y la rotacion del objeto instanciado.
-            bullet1.transform.position = arma.position;
-            bullet1.transform.rotation = Quaternion.Euler(0, 0, rotacion);
-            //bullet1.GetComponent<Enemy>().PadreStar();
+        float _presisarRotacion(float r) {
+            if (inversionY < 0) r += (180 - r) * 2;
+            if (inversionX < 0) r += (180 - r) * 2 + 180;
+            return r;
         }
-    }*/
-
+        GameObject _InstanciarEnemyBullet(GameObject go) {
+            GameObject objetoInstanciado = Instantiate(go).gameObject;
+            objetoInstanciado.tag = "EnemyBullet";
+            return objetoInstanciado;
+        }
+        void _setPositionYRotacionEnemyBullet(GameObject bullet,float rotacion, Transform position) {
+            bullet.transform.position = position.position;
+            bullet.transform.rotation = Quaternion.Euler(0, 0, rotacion);
+        }
+    
     public void Hit() {
         StartCoroutine("_Hit");
     }
