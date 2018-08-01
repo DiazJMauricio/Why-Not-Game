@@ -38,7 +38,7 @@ public class playerShoot : MonoBehaviour {
         {
             StartCoroutine("DisparoTrasero");
         }
-        if (Input.GetButton("Fire3") && pc.energia == pc.maxEnergia)
+        if (Input.GetButton("Fire3") && pc.energiaAlMax)
         {
             StartCoroutine("DisparoEspecial");
         }
@@ -64,7 +64,8 @@ public class playerShoot : MonoBehaviour {
             GameObject bullet1 = Instantiate(bulletEspecial).gameObject;
             bullet1.transform.position = bulletPosition.transform.position;
             bullet1.tag = "PlayerBullet";
-            pc.energia = 0;
+            pc.CargarEnergia(-pc.maxEnergia);
+            pc.EspecialShootEfect.SetActive(false);
             yield return new WaitForSeconds(cadencia);
             disparoDisponible3 = true;
         }

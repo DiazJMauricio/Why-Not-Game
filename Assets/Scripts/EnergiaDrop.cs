@@ -52,7 +52,7 @@ public class EnergiaDrop : MonoBehaviour {
             transform.position.y <= playerPosition.y + 0.3f &&
             transform.position.y > playerPosition.y - 0.3f) {
 
-            playerController.energia++;
+            playerController.CargarEnergia();
             Destroy(gameObject);
         }
     }
