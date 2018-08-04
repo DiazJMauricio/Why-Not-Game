@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
             if (controlDeInstanciaDeNivel[numeroDeInstaciaDeLaDefuncion] == nivel.fasesDelNivel[numeroDeInstaciaDeLaDefuncion].instanciaDeFase.Count)
             {
                 faseActual++;
-                if (faseActual <= nivel.fasesDelNivel.Count)
+                if (faseActual <= nivel.fasesDelNivel.Count-1)
                 {
                     Timing.RunCoroutine(_StarFase(faseActual));
                 }

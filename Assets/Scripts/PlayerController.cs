@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    private int vidas;
+    public int vidasActuales;
     public int maxVidas = 3;
 
     public int maxEnergia = 15;
     private int energia;
     public bool energiaAlMax = false;
     public GameObject EspecialShootEfect;
+
+    public UIManager uiManager;
 
 
     public bool invulnerable = false;
@@ -25,15 +27,18 @@ public class PlayerController : MonoBehaviour {
         }
         //  -------
 
-        vidas = maxVidas;
+        vidasActuales = maxVidas;
         colorOriginal = gameObject.GetComponent<SpriteRenderer>().color;
-        
+        uiManager = FindObjectOfType<UIManager>();
+
+        uiManager.ActualizarVidas(vidasActuales);
+
         EspecialShootEfect.SetActive(false);
     }
 	
 	void Update () {
         if (energia > maxEnergia) energia = maxEnergia;
-        if (vidas > maxVidas) vidas = maxVidas;
+        if (vidasActuales > maxVidas) vidasActuales = maxVidas;
 	}
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -53,19 +58,21 @@ public class PlayerController : MonoBehaviour {
         if (energia < 0) energia = 0;
         energiaAlMax = (energia == maxEnergia);
 
+        uiManager.ActualizarEnergia(energia);
         ActivarEfectoDisparoEspecial();
     }
 
     public void CargarVida(int cant = 1)
     {
         
-        vidas += cant;
-        if (vidas > maxVidas)   vidas = maxVidas;
-        if (vidas < 0)          vidas = 0;
+        vidasActuales += cant;
+        if (vidasActuales > maxVidas)   vidasActuales = maxVidas;
+        if (vidasActuales < 0)          vidasActuales = 0;
         
-        if (vidas == 0) {
+        if (vidasActuales == 0) {
             Debug.Log("GAME OVER");
         }
+        uiManager.ActualizarVidas(vidasActuales);
     }
 
     public void ActivarEfectoDisparoEspecial() {

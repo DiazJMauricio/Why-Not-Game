@@ -22,6 +22,13 @@ public class Enemy : MonoBehaviour {
     public int vidas;
     public int maxVidas = 1;
 
+    //  Cambia el lugar de inicio del objeto y su relacion de movimiento. 
+    public float inversionX = 1;        //  RECOMENDADO [1 o -1].
+    public float inversionY = 1;        //  RECOMENDADO [1 o -1].
+
+
+    //Propiedades
+
     Color colorOriginal;
 
     private Vector3 nextPosition;       //  Define la posicion del objeto.
@@ -34,9 +41,7 @@ public class Enemy : MonoBehaviour {
 
     List <float> cambiosDeMovimiento = new List<float>();
 
-    //  Cambia el lugar de inicio del objeto y su relacion de movimiento. 
-    public float inversionX = 1;        //  RECOMENDADO [1 o -1].
-    public float inversionY = 1;        //  RECOMENDADO [1 o -1].
+    
 
 
     /// FUNCIONES MONOBEHAVIOUR
@@ -181,6 +186,7 @@ public class Enemy : MonoBehaviour {
         drop1.transform.position = transform.position;
     }
 
+
     /// CURRUTINAS
     IEnumerator _Hit() {
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -190,7 +196,6 @@ public class Enemy : MonoBehaviour {
         yield return new WaitForSeconds(0.2f);
         spriteRenderer.color = colorOriginal;
 
-        //yield return new WaitForSeconds(0.2f);
         vidas--;
         yield return null;
     }

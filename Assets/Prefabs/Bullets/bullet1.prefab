@@ -167,10 +167,10 @@ MonoBehaviour:
   cantDrop: 0
   vidas: 0
   maxVidas: 1
-  personalTimer: 0
-  numeroDeInstanciaDelNivel: 0
   inversionX: 1
   inversionY: 1
+  personalTimer: 0
+  numeroDeInstanciaDelNivel: 0
 --- !u!198 &198280000611812854
 ParticleSystem:
   m_ObjectHideFlags: 1
