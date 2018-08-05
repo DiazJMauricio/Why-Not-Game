@@ -105,10 +105,10 @@ MonoBehaviour:
   cantDrop: 0
   vidas: 0
   maxVidas: 1
-  personalTimer: 0
-  numeroDeInstanciaDelNivel: 0
   inversionX: 1
   inversionY: 1
+  personalTimer: 0
+  numeroDeInstanciaDelNivel: 0
 --- !u!212 &212327117374677970
 SpriteRenderer:
   m_ObjectHideFlags: 1

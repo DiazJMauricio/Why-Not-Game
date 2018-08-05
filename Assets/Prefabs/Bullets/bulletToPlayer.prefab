@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 212296937435585064}
   - component: {fileID: 61534348826852412}
   - component: {fileID: 114249819818132778}
+  - component: {fileID: 114570194547818184}
   - component: {fileID: 50463114173021676}
   m_Layer: 0
   m_Name: bulletToPlayer
@@ -167,10 +168,27 @@ MonoBehaviour:
   cantDrop: 0
   vidas: 0
   maxVidas: 1
-  personalTimer: 0
-  numeroDeInstanciaDelNivel: 0
   inversionX: 1
   inversionY: 1
+  personalTimer: 0
+  numeroDeInstanciaDelNivel: 0
+--- !u!114 &114570194547818184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1897546119302538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2194d9e3c01fab249948fc2cff248b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 12
+  spritesRender:
+  - {fileID: 212296937435585064}
+  particulas:
+  - {fileID: 198108969703958842}
+  - {fileID: 198301995833283896}
 --- !u!198 &198108969703958842
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -9387,7 +9405,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: f6093469455eb4f42943cdb97a028a63, type: 3}
-  m_Color: {r: 0.37068352, g: 0.83888215, b: 0.9245283, a: 1}
+  m_Color: {r: 0.15566039, g: 0.76862746, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

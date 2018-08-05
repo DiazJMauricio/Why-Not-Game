@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 212045089905556146}
   - component: {fileID: 58207585825102922}
   - component: {fileID: 114622910609518844}
+  - component: {fileID: 114851217825693946}
   m_Layer: 0
   m_Name: EnergiaDrop
   m_TagString: Drop
@@ -132,6 +133,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidad: 5
   tiempoDespawn: 5
+--- !u!114 &114851217825693946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1862698213725290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2194d9e3c01fab249948fc2cff248b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 9
+  spritesRender:
+  - {fileID: 212045089905556146}
+  particulas:
+  - {fileID: 198253303281704652}
+  - {fileID: 198491439000353412}
 --- !u!198 &198253303281704652
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -9348,7 +9366,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.93387204, g: 0.4764151, b: 1, a: 1}
+  m_Color: {r: 0.65839905, g: 0.47450984, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

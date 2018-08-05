@@ -55,16 +55,26 @@ public class Enemy : MonoBehaviour {
         if (this != null) {
             if (objetoDeNivel) {
             GameManager gameManager = FindObjectOfType<GameManager>();
-            gameManager.InformarDefuncion(numeroDeInstanciaDelNivel);
+            if (gameManager != null)
+                gameManager.InformarDefuncion(numeroDeInstanciaDelNivel);
             }
         } else {
-            Debug.Log("s");
+            
         }
         
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         if (this.tag == "Enemy" && collision.gameObject.tag == "PlayerBullet") {
             Hit();
+        }
+        if (this.tag == "Enemy" && collision.gameObject.tag == "PlayerEspecialBullet") {
+            Hit();
+        }
+        if (this.tag == "EnemyBullet" && collision.gameObject.tag == "Player") {
+            Defuncion();
+        }
+        if (this.tag == "PlayerBullet" && collision.gameObject.tag == "Enemy") {
+            Defuncion();
         }
     }
 

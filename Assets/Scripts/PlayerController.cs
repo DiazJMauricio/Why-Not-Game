@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour {
     }
 	
 	void Update () {
-        if (energia > maxEnergia) energia = maxEnergia;
-        if (vidasActuales > maxVidas) vidasActuales = maxVidas;
+        //if (energia > maxEnergia) energia = maxEnergia;
+        //if (vidasActuales > maxVidas) vidasActuales = maxVidas;
 	}
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour {
     /// FUNCIONES PROPIAS
     
     public void CargarEnergia(int cant = 1) {
-        
-        
         energia += cant;
         if (energia > maxEnergia) energia = maxEnergia;
         if (energia < 0) energia = 0;
@@ -62,9 +60,7 @@ public class PlayerController : MonoBehaviour {
         ActivarEfectoDisparoEspecial();
     }
 
-    public void CargarVida(int cant = 1)
-    {
-        
+    public void CargarVida(int cant = 1) {
         vidasActuales += cant;
         if (vidasActuales > maxVidas)   vidasActuales = maxVidas;
         if (vidasActuales < 0)          vidasActuales = 0;

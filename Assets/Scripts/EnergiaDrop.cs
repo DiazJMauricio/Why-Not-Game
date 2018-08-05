@@ -10,10 +10,12 @@ public class EnergiaDrop : MonoBehaviour {
     private PlayerController playerController;
     private Vector3 playerDirection;
     private float direcion;
+    float r;
 
 
     /// FUNCIONES MONOBEHAVIOUR
     void Start () {
+        r = Random.Range(1.0f, 2f);
         playerController = FindObjectOfType<PlayerController>();
 
         direcion = Random.Range(0f, 360f);
@@ -23,7 +25,8 @@ public class EnergiaDrop : MonoBehaviour {
         StartCoroutine(_Despawn());
     }
 	
-	void Update () {       
+	void Update () {
+        transform.position += new Vector3((-3 + r) * Time.deltaTime, 0, 0);
     }
     private void OnTriggerStay2D(Collider2D collision) {
        
@@ -60,8 +63,7 @@ public class EnergiaDrop : MonoBehaviour {
     /// CORRUTINAS
 
     IEnumerator _Movimiento() {
-        for (int i = 0; i < 15; i++)
-        {
+        for (int i = 0; i < 15; i++) {
             transform.position += transform.right * ((5 + Random.Range(-3, 3)) - i/3) * Time.deltaTime;
             yield return null;
         }

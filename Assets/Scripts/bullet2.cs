@@ -21,8 +21,14 @@ public class bullet2 : MonoBehaviour {
 	void Update () {
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 
-        if (transform.position.x < min.x)
-        {
+        if (transform.position.x < min.x) {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (this.tag == "PlayerBullet" && collision.gameObject.tag == "Enemy") {
             Destroy(gameObject);
         }
     }

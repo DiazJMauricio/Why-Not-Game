@@ -63,7 +63,7 @@ public class playerShoot : MonoBehaviour {
             disparoDisponible3 = false;
             GameObject bullet1 = Instantiate(bulletEspecial).gameObject;
             bullet1.transform.position = bulletPosition.transform.position;
-            bullet1.tag = "PlayerBullet";
+            bullet1.tag = "PlayerEspecialBullet";
             pc.CargarEnergia(-pc.maxEnergia);
             pc.EspecialShootEfect.SetActive(false);
             yield return new WaitForSeconds(cadencia);

@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 212810733552690184}
   - component: {fileID: 61803865699793346}
   - component: {fileID: 114983734322094376}
+  - component: {fileID: 114431861332394910}
   - component: {fileID: 50993406210764884}
   m_Layer: 0
   m_Name: bullet1
@@ -150,6 +151,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.119364135}
   m_EdgeRadius: 0
+--- !u!114 &114431861332394910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1533678171315838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2194d9e3c01fab249948fc2cff248b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 10
+  spritesRender:
+  - {fileID: 212810733552690184}
+  particulas:
+  - {fileID: 198280000611812854}
+  - {fileID: 198741205200868198}
 --- !u!114 &114983734322094376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4890,7 +4908,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.37254903, g: 1, b: 0.27058825, a: 0.39215687}
+      maxColor: {r: 1, g: 0.83130306, b: 0.27058828, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.30588236, g: 0.8941177, b: 0.28235295, a: 1}
@@ -4952,8 +4970,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.4
-      minScalar: 0.1
+      scalar: 0.1
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5907,7 +5925,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -5915,8 +5933,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 1, g: 1, b: 1, a: 0.46666667}
+        key1: {r: 1, g: 1, b: 1, a: 0.5176471}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -6090,7 +6108,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 21300002, guid: f6093469455eb4f42943cdb97a028a63, type: 3}
+    - sprite: {fileID: 21300012, guid: 4da9d1119a4cdaf40885b92f1539ef02, type: 3}
   VelocityModule:
     enabled: 0
     x:
@@ -9387,7 +9405,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300006, guid: f6093469455eb4f42943cdb97a028a63, type: 3}
-  m_Color: {r: 0.33940515, g: 1, b: 0.3176471, a: 1}
+  m_Color: {r: 1, g: 0.43529412, b: 0.5372549, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

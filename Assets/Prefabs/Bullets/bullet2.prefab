@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 212285484981217500}
   - component: {fileID: 114480218128279716}
   - component: {fileID: 61331583643406222}
+  - component: {fileID: 114485520228854986}
   - component: {fileID: 50116417021780916}
   m_Layer: 0
   m_Name: bullet2
@@ -163,6 +164,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direccion: 0
   p: {x: 0, y: 0}
+--- !u!114 &114485520228854986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1790902488408380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2194d9e3c01fab249948fc2cff248b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 11
+  spritesRender:
+  - {fileID: 212285484981217500}
+  particulas:
+  - {fileID: 198877911731994974}
+  - {fileID: 198283555055350958}
 --- !u!198 &198283555055350958
 ParticleSystem:
   m_ObjectHideFlags: 1
