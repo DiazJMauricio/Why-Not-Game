@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public int vidasActuales;
-    public int maxVidas = 3;
-
-    public int maxEnergia = 15;
-    private int energia;
-    public bool energiaAlMax = false;
     public GameObject EspecialShootEfect;
+    
+    public int maxVidas = 3;
+    public int maxEnergia = 15;
 
-    public UIManager uiManager;
+    [HideInInspector]
+    public int vidasActuales;
+    private int energia;
 
+    
 
+    [HideInInspector]
+    public bool energiaAlMax = false;
+    [HideInInspector]
+    public bool onHit = false;
+    [HideInInspector]
+    public bool onDash = false;
+    [HideInInspector]
     public bool invulnerable = false;
-    Color colorOriginal;
+
+    private UIManager uiManager;
+
 
     /// FUNCIONES MONOBEHAVIOUR
 
@@ -26,20 +35,19 @@ public class PlayerController : MonoBehaviour {
             Debug.LogWarning("EspecialShootEfect.GameObject = null in PlayerController [" + gameObject.name + "]");
         }
         //  -------
-
+   
         vidasActuales = maxVidas;
-        colorOriginal = gameObject.GetComponent<SpriteRenderer>().color;
-        uiManager = FindObjectOfType<UIManager>();
 
+        uiManager = FindObjectOfType<UIManager>();
         uiManager.ActualizarVidas(vidasActuales);
 
         EspecialShootEfect.SetActive(false);
     }
 	
 	void Update () {
-        //if (energia > maxEnergia) energia = maxEnergia;
-        //if (vidasActuales > maxVidas) vidasActuales = maxVidas;
-	}
+        ColorPlayer();
+
+    }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "EnemyBullet" && !invulnerable) {
@@ -72,10 +80,18 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void ActivarEfectoDisparoEspecial() {
-
-        energiaAlMax = (energia == maxEnergia);
-        EspecialShootEfect.SetActive(energia == maxEnergia);
+        EspecialShootEfect.SetActive(energiaAlMax);
     }
+
+    public void ColorPlayer() {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        spriteRenderer.color = Color.white;
+        if (energiaAlMax) { spriteRenderer.color = new Color(255/227, 255/101, 255/136, 0.5f); }// 227  101  136
+        if (onDash) { spriteRenderer.color = new Color(0.3f,0.3f,0.3f,0.8f); }
+        if (onHit) { spriteRenderer.color = new Color(1f, 0.1f, 0.1f, 0.9f); ; }
+    }
+
 
     public void Hit() {
         StartCoroutine("_Hit");
@@ -89,19 +105,18 @@ public class PlayerController : MonoBehaviour {
     /// CORRUTINAS
 
     IEnumerator _Hit() {
-        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         ShakeCamara shake = FindObjectOfType<ShakeCamara>();
         shake._ShakeCamara(0.5f);
         CargarVida(-1);
 
         invulnerable = true;
-        spriteRenderer.color = Color.red;
+        onHit = true;
         yield return new WaitForSeconds(0.2f);
-        spriteRenderer.color = Color.white;
+        onHit = false;
         yield return new WaitForSeconds(0.2f);
-        spriteRenderer.color = Color.red;
+        onHit = true;
         yield return new WaitForSeconds(0.2f);
-        spriteRenderer.color = colorOriginal;
+        onHit = false;
         invulnerable = false;
 
         yield return null;

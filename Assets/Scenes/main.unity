@@ -545,6 +545,21 @@ Prefab:
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114962640077989660, guid: 313835a1983ec824cac34742113b1b1a,
+        type: 2}
+      propertyPath: dashMultiplicador
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114962640077989660, guid: 313835a1983ec824cac34742113b1b1a,
+        type: 2}
+      propertyPath: margenes.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114962640077989660, guid: 313835a1983ec824cac34742113b1b1a,
+        type: 2}
+      propertyPath: margenes.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 313835a1983ec824cac34742113b1b1a, type: 2}
   m_IsPrefabAsset: 0

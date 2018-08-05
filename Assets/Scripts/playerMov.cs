@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class playerMov : MonoBehaviour {
-    Vector2 move;
-    Transform miTransform;
-
-    public PlayerController playerController;
-
+    
     public float velocidad;
-    public float margenHor;
-    public float margenVer;
+    public float dashCooldown;
+    public float dashMultiplicador;
+    public Vector2 margenes;
 
     private bool DashDisponible     =   true;
-    public float dashCooldown       =   .5f;
-    public float dashMultiplicador  =   4;
+    private Transform miTransform;
+    private PlayerController playerController;
 
-	void Awake(){
-        miTransform = this.GetComponent<Transform>();
+    void Awake(){
+        miTransform = GetComponent<Transform>();
         playerController = gameObject.GetComponent<PlayerController>();
     }
 
@@ -42,11 +39,11 @@ public class playerMov : MonoBehaviour {
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
-        max.x = max.x - margenHor;
-        min.x = min.x + margenHor;
+        max.x = max.x - margenes.x;
+        min.x = min.x + margenes.x;
 
-        max.y = max.y - margenVer;
-        min.y = min.y + margenVer;
+        max.y = max.y - margenes.y;
+        min.y = min.y + margenes.y;
 
         Vector2 pos = transform.position;
         pos += direccion * velocidad * Time.deltaTime;
@@ -63,12 +60,14 @@ public class playerMov : MonoBehaviour {
 
             DashDisponible = false;
             playerController.invulnerable = true;
+            playerController.onDash = true;
             velocidad *= dashMultiplicador;
 
 
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(.12f);
             velocidad /= dashMultiplicador;
             playerController.invulnerable = false;
+            playerController.onDash = false;
 
             yield return new WaitForSeconds(dashCooldown - 0.1f);
             DashDisponible = true;
