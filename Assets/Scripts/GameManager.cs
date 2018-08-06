@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour {
     public void InstanciarEnemy(Enemy enemy, int nDeInstancia, float xInver = 1, float yInver = 1) {
         
         GameObject Enemy = Instantiate(enemy).gameObject;
-        Enemy.GetComponent<Enemy>().inversionX = xInver;
-        Enemy.GetComponent<Enemy>().inversionY = yInver;
+        Enemy.GetComponent<Enemy>().inversion.x = xInver;
+        Enemy.GetComponent<Enemy>().inversion.y = yInver;
         Enemy.GetComponent<Enemy>().numeroDeInstanciaDelNivel = nDeInstancia;
     }
     public void CotroladorDeFase() {

@@ -3,47 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 
+//  ENEMY CLASS
+//  
+//  Clase para objetos como naves enemigas o balas que sigan un patron de movimiento.
+
 public class Enemy : MonoBehaviour {
     /// INDICE
     /// - Variables.
+    /// 
     /// - Funciones MonoBehaviour.
+    ///     - Start
+    ///     - Update
+    ///     - OnDestroy
+    ///     - OnTriggerEnter2D
+    ///     
     /// - Funciones MonoBehaviour alternativas.
+    ///     - Padre Start
+    ///     - Padre Update
+    ///     
     /// - Funciones Propias.
+    ///     - SetCambiosDeMovimiento
+    ///     - MoveManager
+    ///     - Disparar
+    ///     - Hit
+    ///     - Defuncion
+    ///     - DropEnergia
+    ///     
     /// - Corrutinas.
+    ///     - _Hit
 
 
     /// VARIABLES
-
-    public bool objetoDeNivel;          //  Define si es relevante para activar la siguiente instancia del nivel.
-    public PatronMovimiento patronMovimiento;
-    public GameObject drop;
-    public int cantDrop;
-
-    public int vidas;
-    public int maxVidas = 1;
-
-    //  Cambia el lugar de inicio del objeto y su relacion de movimiento. 
-    public float inversionX = 1;        //  RECOMENDADO [1 o -1].
-    public float inversionY = 1;        //  RECOMENDADO [1 o -1].
+    //  Campos.
+    public int maxVidas = 1;                        //  <- Cantidad de vidas del objeto.
+    public bool objetoDeNivel;                      //  <- Define si es relevante para activar la siguiente instancia del nivel.
+    public PatronMovimiento patronMovimiento;       //  <- Lista de movimientos y cuando ejecutarlos.
+    public GameObject drop;                         //  <- Objeto instanciado al disminuir todas las vidas del objeto
+    public int cantDrop;                            //  <- Cantidad de instanciaciones al morir.
+    public Vector2 inversion = new Vector2(1, 1);   //  <- Cambia el lugar de inicio del objeto y su relacion de movimiento. 
 
 
-    //Propiedades
+    //  Propiedades.
 
-    Color colorOriginal;
+    private int vidas;                              //  <- puntos de vida.
+    private Vector3 nextPosition;                   //  <- Define la posicion del objeto.
+    private Vector3 startPosition;                  //  <- Posicion inicial.
+    private Vector3 playerPosition;                 //  <- Posicion del objeto Player.
+    private Vector3 playerDirection;                //  <- Vector que apunta al objeto player.
 
-    private Vector3 nextPosition;       //  Define la posicion del objeto.
-    private Vector3 startPosition;
-    private Vector3 playerPosition;
-    private Vector3 playerDirection;
+    [HideInInspector]  public float personalTimer;  //  <- Timer que cuenta el tiempo de vida de este objeto.
+    [HideInInspector]
+    public int numeroDeInstanciaDelNivel;           //  <- A que instancia del nivel pertenece este objeto.
 
-    [HideInInspector]  public float personalTimer;
-    [HideInInspector]  public int numeroDeInstanciaDelNivel;
-
-    List <float> cambiosDeMovimiento = new List<float>();
+    //  v-  Almacena los segundos en los que se produce un Cambio de movimiento en el patron de movimiento.
+    List<float> cambiosDeMovimiento = new List<float>();
 
     
-
-
     /// FUNCIONES MONOBEHAVIOUR
     public void Start() {
         PadreStar();
@@ -58,10 +73,7 @@ public class Enemy : MonoBehaviour {
             if (gameManager != null)
                 gameManager.InformarDefuncion(numeroDeInstanciaDelNivel);
             }
-        } else {
-            
         }
-        
     }
     private void OnTriggerEnter2D(Collider2D collision) {
         if (this.tag == "Enemy" && collision.gameObject.tag == "PlayerBullet") {
@@ -79,30 +91,36 @@ public class Enemy : MonoBehaviour {
     }
 
     /// FUNCIONES MONOBEHAVIOUR ALTERNATIVAS
-    //  !- Remplaza la funcion Start() para ser llamada por las clases que hereden de esta clase.
+ 
+    //  Remplaza la funcion Start() 
+    //  llamada por las clases que hereden de esta clase.
     public void PadreStar() {
+        // v- Inicializacion de Variables.
         vidas = maxVidas;
-
-        colorOriginal = gameObject.GetComponent<SpriteRenderer>().color;
-
-        personalTimer = 0f;
-        //  Posicion del objeto.
-        nextPosition = transform.position;
-        SetCambiosDeMovimiento();
-
+        personalTimer = 0f;                  
+        nextPosition = transform.position;     
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         startPosition = this.transform.position;
-        playerDirection = playerPosition - startPosition;
-        float distancia = playerDirection.magnitude;
-        playerDirection = playerDirection / distancia;
+       
+        playerDirection = playerPosition - startPosition;   //  <-|
+        float distancia = playerDirection.magnitude;        //    | Inicializa PlayerDireccion
+        playerDirection = playerDirection / distancia;      //  <-|
+
+        SetCambiosDeMovimiento();               //  <- Llena la Lista CambiosDeMovimiento.
     }
 
-    //  !- Remplaza la funcion Update() para ser llamada por las clases que hereden de esta clase.
-    public void PadreUpdate() {
-        personalTimer += Mathf.Round(Time.fixedDeltaTime * 100) / 100;
-        //  Posicion del objeto.
-        transform.position = new Vector3(nextPosition.x * inversionX, nextPosition.y * inversionY, 0);
 
+
+    //  Remplaza la funcion Update()
+    //  llamada por las clases que hereden de esta clase.
+    public void PadreUpdate() {
+        //  Timer
+        personalTimer += Mathf.Round(Time.fixedDeltaTime * 100) / 100;
+
+        //  Posicion.
+        transform.position = new Vector3(nextPosition.x * inversion.x, nextPosition.y * inversion.y, 0);
+
+        //  Patron de Movimiento.
         MoveManager();
 
         //  Limites de la camara.
@@ -113,14 +131,18 @@ public class Enemy : MonoBehaviour {
         if (transform.position.x > max.x + 5 || transform.position.y > max.y + 5 || transform.position.x < min.x - 5 || transform.position.y < min.y - 5) {
             Destroy(gameObject);
         }
-
+        //  Elimina el Objeto.
         if (vidas == 0) {
             Defuncion();
         }
     }
 
 
+
     /// FUNCIONES PROPIAS
+
+    //  Llena la lista cambiosDeMovimiento con los segundos en los 
+    //  que se produce un cambio de movimiento en el patron de movimiento
     public void SetCambiosDeMovimiento() {
         float cambio = 0;
         cambiosDeMovimiento.Add(cambio);
@@ -129,6 +151,9 @@ public class Enemy : MonoBehaviour {
             cambiosDeMovimiento.Add(cambio);
         }
     }
+
+    //  Interpreta el Patron de movimiento actualizando la variable 'nextPosition'
+    //   que controla la posicion de este objeto
     public void MoveManager() {
         for (int i = 0; i < patronMovimiento.Movimientos.Count; i++) {
             if (personalTimer >= cambiosDeMovimiento[i] && personalTimer < cambiosDeMovimiento[i+1]) {
@@ -152,6 +177,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    //  Instancia un objeto con ciertas propiedades.
     public void Disparar(float time, GameObject bullet,Transform pos, float rotacion = 0) {
         if (_controlDisparo(time)) {
             rotacion = _presisarRotacion(rotacion);
@@ -159,15 +185,15 @@ public class Enemy : MonoBehaviour {
             _setPositionYRotacionEnemyBullet(objeto,rotacion, pos);
         }
     }
-        /// funciones para Disparo
+        /// funciones para Disparar
         bool _controlDisparo(float time) {
             personalTimer = Mathf.Round(personalTimer * 100) / 100;
             time = Mathf.Round(time * 100) / 100;
             return (personalTimer == time);
         }
         float _presisarRotacion(float r) {
-            if (inversionY < 0) r += (180 - r) * 2;
-            if (inversionX < 0) r += (180 - r) * 2 + 180;
+            if (inversion.y < 0) r += (180 - r) * 2;
+            if (inversion.x < 0) r += (180 - r) * 2 + 180;
             return r;
         }
         GameObject _InstanciarEnemyBullet(GameObject go) {
@@ -180,10 +206,12 @@ public class Enemy : MonoBehaviour {
             bullet.transform.rotation = Quaternion.Euler(0, 0, rotacion);
         }
     
+    //  Inicializa la Corrutina '_Hit'
     public void Hit() {
         StartCoroutine("_Hit");
     }
 
+    //  Mata este Objeto y instancia el drop.
     public void Defuncion() {
         for (int i = 0; i < cantDrop; i++) {
             DropEnergia();
@@ -191,6 +219,7 @@ public class Enemy : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    //  Instancia un Drop.
     public void DropEnergia() {
         GameObject drop1 = Instantiate(drop).gameObject;
         drop1.transform.position = transform.position;
@@ -198,13 +227,14 @@ public class Enemy : MonoBehaviour {
 
 
     /// CURRUTINAS
+    //  Resivir Daño.
     IEnumerator _Hit() {
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         
-        spriteRenderer.color = Color.white;
+        spriteRenderer.color = Color.red;
 
         yield return new WaitForSeconds(0.2f);
-        spriteRenderer.color = colorOriginal;
+        spriteRenderer.color = Color.white;
 
         vidas--;
         yield return null;

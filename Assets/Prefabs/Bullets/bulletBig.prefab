@@ -99,14 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2215a40216d13c04289178801ca609c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxVidas: 1
   objetoDeNivel: 0
   patronMovimiento: {fileID: 11400000, guid: 1304eece0c195bd479d077723ee8a51b, type: 2}
   drop: {fileID: 0}
   cantDrop: 0
-  vidas: 0
-  maxVidas: 1
-  inversionX: 1
-  inversionY: 1
+  inversion: {x: 1, y: 1}
   personalTimer: 0
   numeroDeInstanciaDelNivel: 0
 --- !u!212 &212327117374677970

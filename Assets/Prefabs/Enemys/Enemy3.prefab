@@ -78,16 +78,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605609c16d476c346a218ef2aaf1af51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxVidas: 1
   objetoDeNivel: 1
   patronMovimiento: {fileID: 11400000, guid: 0991a4e548385d14e812f44ebb37391c, type: 2}
   drop: {fileID: 1862698213725290, guid: e3fad27b679d39f4c8dd9148f6bc1894, type: 2}
   cantDrop: 3
-  vidas: 0
-  maxVidas: 1
+  inversion: {x: 1, y: 1}
   personalTimer: 0
   numeroDeInstanciaDelNivel: 0
-  inversionX: 1
-  inversionY: 1
   bullet: {fileID: 1897546119302538, guid: bf20c12cb890e174b863daf1d3d91194, type: 2}
 --- !u!212 &212549148940550110
 SpriteRenderer:
