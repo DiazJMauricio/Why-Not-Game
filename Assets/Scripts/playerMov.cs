@@ -16,8 +16,6 @@ public class playerMov : MonoBehaviour {
     void Awake(){
         miTransform = GetComponent<Transform>();
         playerController = gameObject.GetComponent<PlayerController>();
-
-        InicioLv();
     }
 
 	void Update(){
@@ -61,20 +59,7 @@ public class playerMov : MonoBehaviour {
         miTransform.position = pos;
         
     }
-
-    public void InicioLv() {
-        StartCoroutine(_InicioLv());
-        
-    }
-    IEnumerator _InicioLv() {
-        Vector3 centerPos =  new Vector3(0,0,0);
-        while (transform.position != centerPos)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, centerPos, 3 * Time.deltaTime);
-            yield return null;
-        }
-        FindObjectOfType<GameManager>().StartLevel();
-    }
+    
 
     IEnumerator Dash() {
         

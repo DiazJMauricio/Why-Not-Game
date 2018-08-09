@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour {
         
         if (vidasActuales == 0) {
             Debug.Log("GAME OVER");
+            FindObjectOfType<GameManager>().GameOver();
         }
         uiManager.ActualizarVidas(vidasActuales);
     }

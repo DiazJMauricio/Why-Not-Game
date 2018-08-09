@@ -247,7 +247,6 @@ public class Enemy : MonoBehaviour {
         drop1.transform.position = transform.position;
     }
 
-
     /// CURRUTINAS
     //  Resivir Daño.
     IEnumerator _Hit() {

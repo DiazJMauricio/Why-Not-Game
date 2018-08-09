@@ -34,7 +34,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[0].tipoMovimiento
-    value: 0
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[0].duracion
@@ -42,7 +42,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[0].vectorDireccion.x
-    value: -2
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[0].vectorDireccion.y
@@ -54,7 +54,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[0].velocidad
-    value: 0
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[1].tipoMovimiento
@@ -178,19 +178,19 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[6].tipoMovimiento
-    value: 0
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[6].duracion
-    value: 1
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[6].vectorDireccion.x
-    value: 0
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[6].vectorDireccion.y
-    value: -4
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[6].vectorDireccion.z
@@ -198,5 +198,5 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: Movimientos.Array.data[6].velocidad
-    value: 0
+    value: 4
     objectReference: {fileID: 0}

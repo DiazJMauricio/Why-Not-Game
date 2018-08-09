@@ -11,7 +11,10 @@ public class UIManager : MonoBehaviour {
     float barraEnergiaWidthfull;
     int vidasActuales;
 
-
+    public GameObject CartelLv;
+    public GameObject pausaPanel;
+    public GameObject gameOver;
+    public GameObject winPanel;
 
     void Awake()
     {
@@ -21,12 +24,27 @@ public class UIManager : MonoBehaviour {
 
         ActualizarVidas();
         ActualizarEnergia();
+
+        CartelLv.SetActive(false);
+        pausaPanel.SetActive(false);
+        gameOver.SetActive(false);
+        winPanel.SetActive(false);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void MostrarCartelLv() {
+        CartelLv.SetActive(!CartelLv.activeInHierarchy);
+    }
+    public void MostrarPausaPanel() {
+        pausaPanel.SetActive(!pausaPanel.activeInHierarchy);
+    }
+    public void MostrarGameOver()
+    {
+        gameOver.SetActive(!gameOver.activeInHierarchy);
+    }
+    public void MostrarWinPanel()
+    {
+        winPanel.SetActive(!winPanel.activeInHierarchy);
+    }
 
     public void ActualizarVidas(int vidas = 0) {        
         foreach (Image vida in vidasImage) {
