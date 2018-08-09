@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Movimiento {
 
-    public enum TipoMovimiento {Vectorial, Arco , DireccionAlPlayer, Derecha};
+    public enum TipoMovimiento {Vectorial, Arco , DireccionAlPlayer, Derecha, toPosition};
     public TipoMovimiento tipoMovimiento;
 
     public float duracion;
     public Vector3 vectorDireccion = new Vector3();
     public float velocidad;
-    
-
 }

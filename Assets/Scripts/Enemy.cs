@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour {
     private Vector3 startPosition;                  //  <- Posicion inicial.
     private Vector3 playerPosition;                 //  <- Posicion del objeto Player.
     private Vector3 playerDirection;                //  <- Vector que apunta al objeto player.
+    protected int movimientoActual = 0;
 
     [HideInInspector]  public float personalTimer;  //  <- Timer que cuenta el tiempo de vida de este objeto.
     [HideInInspector]
@@ -114,26 +115,29 @@ public class Enemy : MonoBehaviour {
     //  Remplaza la funcion Update()
     //  llamada por las clases que hereden de esta clase.
     public void PadreUpdate() {
-        //  Timer
-        personalTimer += Mathf.Round(Time.fixedDeltaTime * 100) / 100;
+        if (!GameManager.pause)
+        {
+            //  Timer
+            personalTimer += Mathf.Round(Time.fixedDeltaTime * 100) / 100;
 
-        //  Posicion.
-        transform.position = new Vector3(nextPosition.x * inversion.x, nextPosition.y * inversion.y, 0);
+            //  Posicion.
+            transform.position = new Vector3(nextPosition.x * inversion.x, nextPosition.y * inversion.y, 0);
 
-        //  Patron de Movimiento.
-        MoveManager();
+            //  Patron de Movimiento.
+            MoveManager();
 
-        //  Limites de la camara.
-        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+            //  Limites de la camara.
+            Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+            Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
-        //  Elimina este objeto si sale de los limites permitidos.
-        if (transform.position.x > max.x + 5 || transform.position.y > max.y + 5 || transform.position.x < min.x - 5 || transform.position.y < min.y - 5) {
-            Destroy(gameObject);
-        }
-        //  Elimina el Objeto.
-        if (vidas == 0) {
-            Defuncion();
+            //  Elimina este objeto si sale de los limites permitidos.
+            if (transform.position.x > max.x + 5 || transform.position.y > max.y + 5 || transform.position.x < min.x - 5 || transform.position.y < min.y - 5) {
+                Destroy(gameObject);
+            }
+            //  Elimina el Objeto.
+            if (vidas == 0) {
+                Defuncion();
+            }
         }
     }
 
@@ -155,34 +159,52 @@ public class Enemy : MonoBehaviour {
     //  Interpreta el Patron de movimiento actualizando la variable 'nextPosition'
     //   que controla la posicion de este objeto
     public void MoveManager() {
-        for (int i = 0; i < patronMovimiento.Movimientos.Count; i++) {
-            if (personalTimer >= cambiosDeMovimiento[i] && personalTimer < cambiosDeMovimiento[i+1]) {
-                switch (patronMovimiento.Movimientos[i].tipoMovimiento)
-                {
-                    case Movimiento.TipoMovimiento.Vectorial:
-                        nextPosition += patronMovimiento.Movimientos[i].vectorDireccion * Time.fixedDeltaTime;
-                        break;
-                    case Movimiento.TipoMovimiento.Arco:
-                        break;
-                    case Movimiento.TipoMovimiento.DireccionAlPlayer:
-                        nextPosition += playerDirection * patronMovimiento.Movimientos[i].velocidad * Time.fixedDeltaTime;
-                        break;
-                    case Movimiento.TipoMovimiento.Derecha:
-                        nextPosition += transform.right * patronMovimiento.Movimientos[i].velocidad * Time.deltaTime;
-                        break;
-                    default:
-                        break;
-                } 
+        for (int i = movimientoActual; i < cambiosDeMovimiento.Count-1; i++) {
+            if (cambiosDeMovimiento[i] == Mathf.Round( personalTimer * 100 ) / 100) {
+                movimientoActual = i;
+                break;
             }
+        }
+        switch (patronMovimiento.Movimientos[movimientoActual].tipoMovimiento) {
+            case Movimiento.TipoMovimiento.Vectorial:
+                nextPosition += patronMovimiento.Movimientos[movimientoActual].vectorDireccion * Time.fixedDeltaTime;
+                break;
+            case Movimiento.TipoMovimiento.Arco:
+                break;
+            case Movimiento.TipoMovimiento.toPosition:
+                nextPosition = Vector3.MoveTowards(nextPosition, patronMovimiento.Movimientos[movimientoActual].vectorDireccion, patronMovimiento.Movimientos[movimientoActual].velocidad * Time.fixedDeltaTime);
+                break;
+            case Movimiento.TipoMovimiento.DireccionAlPlayer:
+                nextPosition += playerDirection * patronMovimiento.Movimientos[movimientoActual].velocidad * Time.fixedDeltaTime;
+                break;
+            case Movimiento.TipoMovimiento.Derecha:
+                nextPosition += transform.right * patronMovimiento.Movimientos[movimientoActual].velocidad * Time.fixedDeltaTime;
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected void _reiniciarCiclo(float time, float volverA) {
+        personalTimer = Mathf.Round(personalTimer * 100) / 100;
+        time = Mathf.Round(time * 100) / 100;
+        if (personalTimer == time) {
+            movimientoActual = 1;
+            personalTimer = volverA;
+            
         }
     }
 
     //  Instancia un objeto con ciertas propiedades.
     public void Disparar(float time, GameObject bullet,Transform pos, float rotacion = 0) {
-        if (_controlDisparo(time)) {
-            rotacion = _presisarRotacion(rotacion);
-            GameObject objeto = _InstanciarEnemyBullet(bullet);
-            _setPositionYRotacionEnemyBullet(objeto,rotacion, pos);
+        if (!GameManager.pause)
+        {
+            if (_controlDisparo(time))
+            {
+                rotacion = _presisarRotacion(rotacion);
+                GameObject objeto = _InstanciarEnemyBullet(bullet);
+                _setPositionYRotacionEnemyBullet(objeto, rotacion, pos);
+            }
         }
     }
         /// funciones para Disparar

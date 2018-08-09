@@ -42,6 +42,14 @@ public class CustomPatronMovimientoEditor : Editor {
                     break;
                 case Movimiento.TipoMovimiento.Arco:
                     break;
+                case Movimiento.TipoMovimiento.toPosition:
+                    GUILayout.Label("Duracion");
+                    db.Movimientos[i].duracion = EditorGUILayout.FloatField(db.Movimientos[i].duracion, GUILayout.Width(40));
+                    GUILayout.Label("velocidad");
+                    db.Movimientos[i].velocidad = EditorGUILayout.FloatField(db.Movimientos[i].velocidad, GUILayout.Width(40));
+                    GUILayout.Label("Destino");
+                    db.Movimientos[i].vectorDireccion = EditorGUILayout.Vector2Field("", db.Movimientos[i].vectorDireccion, GUILayout.Width(80));
+                    break;
                 case Movimiento.TipoMovimiento.Derecha:
                     GUILayout.Label("Duracion");
                     db.Movimientos[i].duracion = EditorGUILayout.FloatField(db.Movimientos[i].duracion, GUILayout.Width(40));

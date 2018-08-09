@@ -16,25 +16,31 @@ public class playerMov : MonoBehaviour {
     void Awake(){
         miTransform = GetComponent<Transform>();
         playerController = gameObject.GetComponent<PlayerController>();
+
+        InicioLv();
     }
 
 	void Update(){
+        if (GameManager.lvRun)
+        {
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
 
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+            Vector2 direction = new Vector2(x, y);
 
-        Vector2 direction = new Vector2 (x, y);
+            Mover(direction);
 
-        Mover(direction);
-
-        // Dash
-        if (Input.GetButtonDown("Dash")) {
-            StartCoroutine(Dash());
+            // Dash
+            if (Input.GetButtonDown("Dash"))
+            {
+                StartCoroutine(Dash());
+            }
         }
 		
 	}
     
     void Mover(Vector2 direccion) {
+        
         //Limites de la camara.
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
@@ -53,7 +59,23 @@ public class playerMov : MonoBehaviour {
         pos.y = Mathf.Clamp(pos.y, min.y, max.y);
 
         miTransform.position = pos;
+        
     }
+
+    public void InicioLv() {
+        StartCoroutine(_InicioLv());
+        
+    }
+    IEnumerator _InicioLv() {
+        Vector3 centerPos =  new Vector3(0,0,0);
+        while (transform.position != centerPos)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, centerPos, 3 * Time.deltaTime);
+            yield return null;
+        }
+        FindObjectOfType<GameManager>().StartLevel();
+    }
+
     IEnumerator Dash() {
         
         if (DashDisponible) {

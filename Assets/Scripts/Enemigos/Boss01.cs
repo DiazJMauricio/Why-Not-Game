@@ -54,12 +54,5 @@ public class Boss01 : Enemy {
         _reiniciarCiclo(UltimoDisparo, 4);
     }
 
-    void _reiniciarCiclo(float time, float volverA) {
-        personalTimer = Mathf.Round(personalTimer * 100) / 100;
-        time = Mathf.Round(time * 100) / 100;
-        if (personalTimer == time)
-        {
-            personalTimer = volverA;
-        }
-    }
+    
 }
