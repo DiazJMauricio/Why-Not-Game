@@ -58,20 +58,19 @@ public class Enemy : MonoBehaviour {
 
     //  v-  Almacena los segundos en los que se produce un Cambio de movimiento en el patron de movimiento.
     List<float> cambiosDeMovimiento = new List<float>();
+    private GameManager gameManager;
 
-    
+
     /// FUNCIONES MONOBEHAVIOUR
-    public void Start() {
+    protected virtual void Start() {
         PadreStar();
     }
-    public void Update() {
+    protected virtual void Update() {
         PadreUpdate();
     }
     private void OnDestroy() {
         if (this != null) {
-            if (objetoDeNivel) {
-            GameManager gameManager = FindObjectOfType<GameManager>();
-            if (gameManager != null)
+            if (objetoDeNivel && gameManager != null) {
                 gameManager.InformarDefuncion(numeroDeInstanciaDelNivel);
             }
         }
@@ -101,6 +100,7 @@ public class Enemy : MonoBehaviour {
         personalTimer = 0f;                  
         nextPosition = transform.position;     
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        gameManager = FindObjectOfType<GameManager>();
         startPosition = this.transform.position;
        
         playerDirection = playerPosition - startPosition;   //  <-|

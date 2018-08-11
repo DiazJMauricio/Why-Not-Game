@@ -8,13 +8,13 @@ public class Boss01 : Enemy {
     public Transform arma1;
     public Transform arma2;
     // Use this for initialization
-    new void Start () {
-        PadreStar();
+    protected override void Start () {
+        base.Start();
     }
 	
 	// Update is called once per frame
-	new void Update () {
-        PadreUpdate();
+	protected override void Update () {
+        base.Update();
         AtackManager();
     }
 

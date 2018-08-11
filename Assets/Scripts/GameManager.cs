@@ -2,32 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public static bool pause = false;
-    public static bool lvRun = false;
+    public static bool pause;
+    public static bool lvRun;
 
     public Nivel nivel;
 
-    static int faseActual = 0;
+    static int faseActual;
     List<int> controlDeInstanciaDeNivel = new List<int>();
     UIManager uIManager;
-    private bool lvEnd = false;
+    private bool lvEnd;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake() {
         uIManager = FindObjectOfType<UIManager>();
-        CotroladorDeFase();
         StartLevel();
+        CotroladorDeFase();
     }
-	
-	// Update is called once per frame
+    
 	void Update () {
         if (Input.GetKeyDown(KeyCode.F)) {
-            Timing.RunCoroutine(_StarFase(faseActual));
-            faseActual++;
-            Timing.RunCoroutine(_StarFase(faseActual));
+            RestarEscene();
         }
 
 
@@ -58,10 +55,12 @@ public class GameManager : MonoBehaviour {
     public void Pause() {
         uIManager.MostrarPausaPanel();
         Time.timeScale = 0;
+        pause = true;
     }
     public void Resume() {
         uIManager.MostrarPausaPanel();
         Time.timeScale = 1;
+        pause = false;
     }
     public void GameOver() {
         if (!lvEnd) { 
@@ -72,14 +71,27 @@ public class GameManager : MonoBehaviour {
             pause = true;
         }
     }
+    public void RestarEscene() {
+        SceneManager.LoadScene("main");
+    }
+
+    public void VolverAlMenu()
+    {
+        SceneManager.LoadScene("MenuInicio");
+    }
 
     private void IniciarPlayer() {
         GameObject player = FindObjectOfType<playerMov>().gameObject;
-        Timing.RunCoroutine(_IntroducirPlayer(player));
+        //Timing.RunCoroutine(_IntroducirPlayer(player));
+        StartCoroutine(_IntroducirPlayer(player));
     }
     public void StartLevel() {
+        Time.timeScale = 1;
+        faseActual = 0;
+        lvEnd = false;
+        pause = false;
+        lvRun = false;
         IniciarPlayer();
-        uIManager.MostrarCartelLv();
     }
     public void InstanciarEnemy(Enemy enemy, int nDeInstancia, float xInver = 1, float yInver = 1) {
         
@@ -113,7 +125,7 @@ public class GameManager : MonoBehaviour {
     }
 
     
-
+   
     IEnumerator<float> _StarFase(int fase) {
         float segundo = 0;
         
@@ -138,19 +150,22 @@ public class GameManager : MonoBehaviour {
                 segundo += Time.fixedDeltaTime;
             }
             yield return Timing.WaitForOneFrame;
+           
         }
     }
-
-    IEnumerator<float> _IntroducirPlayer(GameObject player)
+    IEnumerator _IntroducirPlayer(GameObject player)
+    //IEnumerator<float> _IntroducirPlayer(GameObject player)
     {
         Vector3 centerPos = new Vector3(0, 0, 0);
         while (player.transform.position != centerPos)
         {
             player.transform.position = Vector3.MoveTowards(player.transform.position, centerPos, 3 * Time.deltaTime);
-            yield return Timing.WaitForOneFrame;
+            //yield return Timing.WaitForOneFrame;
+            yield return null;
         }
         uIManager.MostrarCartelLv();
-        yield return Timing.WaitForSeconds(1f);
+        //yield return Timing.WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
         StartGame();
         
     }
@@ -164,6 +179,6 @@ public class GameManager : MonoBehaviour {
             player.transform.position = Vector3.MoveTowards(player.transform.position, centerPos, 5 * Time.deltaTime);
             yield return Timing.WaitForOneFrame;
         }
-        StartGame();
+        VolverAlMenu();
     }
 }

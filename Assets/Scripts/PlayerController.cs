@@ -28,7 +28,10 @@ public class PlayerController : MonoBehaviour {
 
 
     /// FUNCIONES MONOBEHAVIOUR
-
+    private void Awake()
+    {
+        vidasActuales = maxVidas;
+    }
     void Start () {
         //  Alertas
         if (EspecialShootEfect == null) {

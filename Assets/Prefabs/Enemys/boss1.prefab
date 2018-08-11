@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c75ecca176f32da41a80a16188e08a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVidas: 5
+  maxVidas: 25
   objetoDeNivel: 1
   patronMovimiento: {fileID: 11400000, guid: 5e344d249ae158b4990dd2f81782ff3f, type: 2}
   drop: {fileID: 1862698213725290, guid: e3fad27b679d39f4c8dd9148f6bc1894, type: 2}

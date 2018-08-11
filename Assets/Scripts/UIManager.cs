@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour {
         ActualizarVidas();
         ActualizarEnergia();
 
-        CartelLv.SetActive(false);
+        CartelLv.SetActive(true);
         pausaPanel.SetActive(false);
         gameOver.SetActive(false);
         winPanel.SetActive(false);
