@@ -5,15 +5,10 @@ using UnityEngine;
 public class Enemy03 : Enemy {
 
     public GameObject bullet;
-
-    // Use this for initialization
-    new void Start () {
-        PadreStar();
-    }
-	
+    
 	// Update is called once per frame
-	new void Update () {
-        PadreUpdate();
+	protected override void Update () {
+        base.Update();
         AtackManager();
     }
 

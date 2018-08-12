@@ -9,13 +9,13 @@ public class Enemy02 : Enemy {
     public GameObject bullet;
     
     // Use this for initialization
-    new void Start () {
-        PadreStar();       
+    protected override void Start () {
+        base.Start();     
     }
 
     // Update is called once per frame
-    new void Update () {
-        PadreUpdate();
+    protected override void Update () {
+        base.Update();
         AtackManager();
     }
 

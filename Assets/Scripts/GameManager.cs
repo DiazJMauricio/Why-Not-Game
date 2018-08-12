@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     public Nivel nivel;
 
     static int faseActual;
-    List<int> controlDeInstanciaDeNivel = new List<int>();
+    static List<int> controlDeInstanciaDeNivel = new List<int>();
     UIManager uIManager;
     private bool lvEnd;
 
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void IniciarPlayer() {
-        GameObject player = FindObjectOfType<playerMov>().gameObject;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         //Timing.RunCoroutine(_IntroducirPlayer(player));
         StartCoroutine(_IntroducirPlayer(player));
     }

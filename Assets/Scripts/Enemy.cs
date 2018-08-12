@@ -17,10 +17,6 @@ public class Enemy : MonoBehaviour {
     ///     - OnDestroy
     ///     - OnTriggerEnter2D
     ///     
-    /// - Funciones MonoBehaviour alternativas.
-    ///     - Padre Start
-    ///     - Padre Update
-    ///     
     /// - Funciones Propias.
     ///     - SetCambiosDeMovimiento
     ///     - MoveManager
@@ -63,10 +59,47 @@ public class Enemy : MonoBehaviour {
 
     /// FUNCIONES MONOBEHAVIOUR
     protected virtual void Start() {
-        PadreStar();
+        // v- Inicializacion de Variables.
+        vidas = maxVidas;
+        personalTimer = 0f;
+        nextPosition = transform.position;
+        playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        gameManager = FindObjectOfType<GameManager>();
+        startPosition = this.transform.position;
+
+        playerDirection = playerPosition - startPosition;   //  <-|
+        float distancia = playerDirection.magnitude;        //    | Inicializa PlayerDireccion
+        playerDirection = playerDirection / distancia;      //  <-|
+
+        SetCambiosDeMovimiento();               //  <- Llena la Lista CambiosDeMovimiento.
     }
     protected virtual void Update() {
-        PadreUpdate();
+        if (!GameManager.pause)
+        {
+            //  Timer
+            personalTimer += Mathf.Round(Time.fixedDeltaTime * 100) / 100;
+
+            //  Posicion.
+            transform.position = new Vector3(nextPosition.x * inversion.x, nextPosition.y * inversion.y, 0);
+
+            //  Patron de Movimiento.
+            MoveManager();
+
+            //  Limites de la camara.
+            Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
+            Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+
+            //  Elimina este objeto si sale de los limites permitidos.
+            if (transform.position.x > max.x + 5 || transform.position.y > max.y + 5 || transform.position.x < min.x - 5 || transform.position.y < min.y - 5)
+            {
+                Destroy(gameObject);
+            }
+            //  Elimina el Objeto.
+            if (vidas == 0)
+            {
+                Defuncion();
+            }
+        }
     }
     private void OnDestroy() {
         if (this != null) {
@@ -89,58 +122,6 @@ public class Enemy : MonoBehaviour {
             Defuncion();
         }
     }
-
-    /// FUNCIONES MONOBEHAVIOUR ALTERNATIVAS
- 
-    //  Remplaza la funcion Start() 
-    //  llamada por las clases que hereden de esta clase.
-    public void PadreStar() {
-        // v- Inicializacion de Variables.
-        vidas = maxVidas;
-        personalTimer = 0f;                  
-        nextPosition = transform.position;     
-        playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-        gameManager = FindObjectOfType<GameManager>();
-        startPosition = this.transform.position;
-       
-        playerDirection = playerPosition - startPosition;   //  <-|
-        float distancia = playerDirection.magnitude;        //    | Inicializa PlayerDireccion
-        playerDirection = playerDirection / distancia;      //  <-|
-
-        SetCambiosDeMovimiento();               //  <- Llena la Lista CambiosDeMovimiento.
-    }
-
-
-
-    //  Remplaza la funcion Update()
-    //  llamada por las clases que hereden de esta clase.
-    public void PadreUpdate() {
-        if (!GameManager.pause)
-        {
-            //  Timer
-            personalTimer += Mathf.Round(Time.fixedDeltaTime * 100) / 100;
-
-            //  Posicion.
-            transform.position = new Vector3(nextPosition.x * inversion.x, nextPosition.y * inversion.y, 0);
-
-            //  Patron de Movimiento.
-            MoveManager();
-
-            //  Limites de la camara.
-            Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-            Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-
-            //  Elimina este objeto si sale de los limites permitidos.
-            if (transform.position.x > max.x + 5 || transform.position.y > max.y + 5 || transform.position.x < min.x - 5 || transform.position.y < min.y - 5) {
-                Destroy(gameObject);
-            }
-            //  Elimina el Objeto.
-            if (vidas == 0) {
-                Defuncion();
-            }
-        }
-    }
-
 
 
     /// FUNCIONES PROPIAS
