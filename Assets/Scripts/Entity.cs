@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //  Todas las IEntity son instancias de la Fase de un nivel.
-public class EntityDefault : MonoBehaviour, IEntity {
-
-    public Health Health                        { get; set; }
+public class Entity : MonoBehaviour {
+    public Health miHealth                      { get; set; }
     public MoveWithPattern MoveWithP            { get; set; }
     public int NumeroDeLaFasePerteneciente      { get; set; }
-    public GameManager IGameManager             { get; set; }
+    private ManagerLevel LevelManager           { get; set; }
 
 
-    protected virtual void Awake () {
-        IGameManager = FindObjectOfType<GameManager>();
+    protected virtual void Awake ()
+    {
+        MoveWithP = GetComponent<MoveWithPattern>();
+        miHealth = GetComponent<Health>();
+        LevelManager = FindObjectOfType<ManagerLevel>();
         NumeroDeLaFasePerteneciente = 0;
 	}
 
-    protected virtual void Update () {
-
+    protected virtual void Update ()
+    {
         //  El objeto sale de la escena.
         if (MoveWithP.FueraDeCuadro())  KillThisObject();
 
         //  El objeto fue Eliminado por el player.
-        else if (Health.IsDead())    DeadByHealth();
+        else if (miHealth.IsDead())    DeadByHealth();
     }
 
 
@@ -33,8 +35,8 @@ public class EntityDefault : MonoBehaviour, IEntity {
         KillThisObject();
     }
 
-    private void KillThisObject() {
-        IGameManager.InformarDefuncion(NumeroDeLaFasePerteneciente);
+    protected virtual void KillThisObject() {
+        LevelManager.InformarDefuncion(NumeroDeLaFasePerteneciente);
         Destroy(gameObject);
     }
 }

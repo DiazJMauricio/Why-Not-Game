@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void StartGame() {
+    public void StartGame() {//
         lvRun = true;
         Timing.RunCoroutine(_StarFase(faseActual));
         faseActual++;
@@ -52,17 +52,17 @@ public class GameManager : MonoBehaviour {
         lvRun = false;
     }
 
-    public void Pause() {
+    public void Pause() {//
         uIManager.MostrarPausaPanel();
         Time.timeScale = 0;
         pause = true;
     }
-    public void Resume() {
+    public void Resume() {//
         uIManager.MostrarPausaPanel();
         Time.timeScale = 1;
         pause = false;
     }
-    public void GameOver() {
+    public void GameOver() {//
         if (!lvEnd) { 
             uIManager.MostrarGameOver();
             lvRun = false;
@@ -71,11 +71,11 @@ public class GameManager : MonoBehaviour {
             pause = true;
         }
     }
-    public void RestarEscene() {
+    public void RestarEscene() {//
         SceneManager.LoadScene("main");
     }
 
-    public void VolverAlMenu()
+    public void VolverAlMenu()//
     {
         SceneManager.LoadScene("MenuInicio");
     }
@@ -93,19 +93,19 @@ public class GameManager : MonoBehaviour {
         lvRun = false;
         IniciarPlayer();
     }
-    public void InstanciarEnemy(Enemy enemy, int nDeInstancia, float xInver = 1, float yInver = 1) {
+    public void InstanciarEnemy(Enemy enemy, int nDeInstancia, float xInver = 1, float yInver = 1) {//
         
         GameObject Enemy = Instantiate(enemy).gameObject;
         Enemy.GetComponent<Enemy>().inversion.x = xInver;
         Enemy.GetComponent<Enemy>().inversion.y = yInver;
         Enemy.GetComponent<Enemy>().numeroDeInstanciaDelNivel = nDeInstancia;
     }
-    public void CotroladorDeFase() {
+    public void CotroladorDeFase() {//
         for (int i = 0; i < nivel.fasesDelNivel.Count; i++) {
             controlDeInstanciaDeNivel.Add(0);
         }
     }
-    public void InformarDefuncion(int FaseaDeLaDefuncion) {
+    public void InformarDefuncion(int FaseaDeLaDefuncion) {//
 
         if (faseActual < nivel.fasesDelNivel.Count) {
             controlDeInstanciaDeNivel[FaseaDeLaDefuncion]++;
@@ -138,12 +138,12 @@ public class GameManager : MonoBehaviour {
                     segundoDeInstancia += nivel.fasesDelNivel[fase].instanciaDeFase[instancia].waitForSecons;
                 
                     if (Mathf.Round(segundo * 100) / 100 == Mathf.Round(segundoDeInstancia * 100) / 100) {
-
+/*
                         float inverX = nivel.fasesDelNivel[fase].instanciaDeFase[instancia].Xinvert;
                         float inverY = nivel.fasesDelNivel[fase].instanciaDeFase[instancia].Yinvert;
                         Enemy bullet = nivel.fasesDelNivel[fase].instanciaDeFase[instancia].enemy;
 
-                        InstanciarEnemy(bullet, fase, inverX, inverY);
+                        InstanciarEnemy(bullet, fase, inverX, inverY);*/
                     }
                 }
             
