@@ -2,60 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerShoot : MonoBehaviour {
+public class PlayerShootManager : MonoBehaviour {
 
-    public Enemy bullet;
-    public GameObject bulletTrasera;
-    public GameObject bulletEspecial;
+    public Proyectile bullet1;
+    private bool bullet1Enable = true;
+    public float bullet1Cadencia;
 
-    public GameObject bulletPosition;
-    public GameObject bulletPosition2;
-    
-    private bool disparoDisponible = true;
-    private bool disparoDisponible2 = true;
-    private bool disparoDisponible3 = true;
-    public float cadencia;
-    private bool direccionDisparoTrasero;
-    public int cantDisparosTraseros;
-    public float cadenciaDTrasero;
-    public float tiempoEntreDTraseros;
+    public GameObject canon1;
 
-    PlayerController pc;
 
 	// Use this for initialization
 	void Start () {
-        pc = gameObject.GetComponent<PlayerController>();
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
-        if (Input.GetAxis("Fire1") == 1) {
+        if (Input.GetAxis("Fire1") == 1)
+        {
             StartCoroutine("DisparoDelantero");
         }
-
         if (Input.GetButton("Fire2"))
         {
-            StartCoroutine("DisparoTrasero");
+            //StartCoroutine("DisparoTrasero");
         }
-        if (Input.GetButton("Fire3") && pc.energiaAlMax)
+        /*if (Input.GetButton("Fire3") && pc.energiaAlMax)
         {
             StartCoroutine("DisparoEspecial");
-        }
+        }*/
     }
 
     IEnumerator DisparoDelantero()
     {
-        if (disparoDisponible)
+        if (bullet1Enable)
         {
-            disparoDisponible = false;
-            GameObject bullet1 =Instantiate(bullet).gameObject;
-            bullet1.transform.position = bulletPosition.transform.position;
-            bullet1.tag = "PlayerBullet";
-            yield return new WaitForSeconds(cadencia);
-            disparoDisponible = true;
+            bullet1Enable = false;
+            GameObject bullet = Instantiate(bullet1).gameObject;
+            bullet.transform.position = canon1.transform.position;
+            bullet.tag = "PlayerBullet";
+
+            yield return new WaitForSeconds(bullet1Cadencia);
+            bullet1Enable = true;
         }
     }
+    /*
     IEnumerator DisparoEspecial()
     {
         if (disparoDisponible3)
@@ -89,5 +79,5 @@ public class playerShoot : MonoBehaviour {
             yield return new WaitForSeconds(cadenciaDTrasero);
             disparoDisponible2 = true;
         }
-    }
+    }*/
 }

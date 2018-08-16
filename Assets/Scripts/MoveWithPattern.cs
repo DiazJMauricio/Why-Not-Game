@@ -18,20 +18,34 @@ public class MoveWithPattern : Timer {
     private List<float> cambiosDeMovimiento = new List<float>();
 
 
-    void Awake ()
+    private void Awake ()
     {
         if (patronMovimiento == null)  Debug.LogError("El Objeto " + gameObject.name + " no tiene instanciado un Patron de movimiento");
 
-        SetVariables();
+        
         SetSecondOnTimer(0f);
     }
-	
-
-	void Update () {
-        //  Patron de Movimiento.
-        MoveManager();
-        UpdateTimer();
+    private void Start()
+    {
+        SetVariables();
     }
+
+    void Update () {
+        
+        if (!ManagerGame.inPausa) {
+            //  Patron de Movimiento.
+            MoveManager();
+            UpdateTimer();
+            if (GetComponent<Entity>() == null)
+            {
+                if (FueraDeCuadro())
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
+    }
+
 
 
 
@@ -94,9 +108,9 @@ public class MoveWithPattern : Timer {
             default:
                 break;
         }
-
         //  Posicion.
         transform.position = new Vector3(nextPosition.x * inversion.x, nextPosition.y * inversion.y, 0);
+
     }
 
 

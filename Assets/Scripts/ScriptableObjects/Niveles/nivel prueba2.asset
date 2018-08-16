@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34414b686b5b793448d36adf8f1a75d2, type: 3}
-  m_Name: 
+  m_Name: nivel prueba2
   m_EditorClassIdentifier: 
   fasesDelNivel:
   - instanciaDeFase:
@@ -20,39 +20,18 @@ MonoBehaviour:
       Yinvert: 1
     - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
         type: 2}
-      waitForSecons: 0.2
-      Xinvert: 1
+      waitForSecons: 0
+      Xinvert: -1
       Yinvert: 1
   - instanciaDeFase:
     - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
         type: 2}
       waitForSecons: 0
-      Xinvert: -1
-      Yinvert: 1
-    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
-        type: 2}
-      waitForSecons: 0.2
-      Xinvert: -1
-      Yinvert: 1
-  - instanciaDeFase:
-    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
-        type: 2}
-      waitForSecons: 0.1
       Xinvert: 1
-      Yinvert: -1
-    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
-        type: 2}
-      waitForSecons: 0
-      Xinvert: -1
       Yinvert: -1
   - instanciaDeFase:
     - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
         type: 2}
-      waitForSecons: 0.1
-      Xinvert: -1
-      Yinvert: 1
-    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
-        type: 2}
-      waitForSecons: 0
+      waitForSecons: 0.4
       Xinvert: 1
-      Yinvert: 1
+      Yinvert: -1

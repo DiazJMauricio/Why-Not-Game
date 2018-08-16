@@ -18,9 +18,10 @@ public class ManagerLevel : MonoBehaviour {
         CotroladorDeFase();
         gameManager = GetComponent<ManagerGame>();
     }
+
     private void Start()
     {
-        StartLevel();
+        gameManager.LevelStart += StartLevel;
     }
 
     public void StartLevel()
@@ -38,6 +39,7 @@ public class ManagerLevel : MonoBehaviour {
         }
     }
 
+    //  Inicializa la fase siguiente si todas las entidades de una face fueron eliminadas.
     public void InformarDefuncion(int FaseaDeLaDefuncion)
     {
         if (faseActual < LevelSettins.fasesDelNivel.Count)
@@ -67,10 +69,12 @@ public class ManagerLevel : MonoBehaviour {
         Entity.GetComponent<Entity>().NumeroDeLaFasePerteneciente = nDeInstancia;
     }
 
+
+    //  Inicializa una Fase
     IEnumerator _StarFase(int fase)
     {
-        float duracionDeFase = 0;
-        float segundo = 0;
+        float duracionDeFase = 0.1f;
+        float segundo = 0f;
         for (int i = 0; i < LevelSettins.fasesDelNivel[fase].instanciaDeFase.Count; i++)
         {
             duracionDeFase += LevelSettins.fasesDelNivel[fase].instanciaDeFase[i].waitForSecons;

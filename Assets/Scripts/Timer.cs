@@ -11,10 +11,18 @@ public abstract class Timer : MonoBehaviour {
     }
 
     protected void UpdateTimer() {
-        personalTimer += Mathf.Round(Time.fixedDeltaTime * 100) / 100;
+        personalTimer += Time.fixedDeltaTime;
+        personalTimer = Mathf.Round(personalTimer * 100) / 100;
+    }
+
+    protected void FixedUpdateTimer()
+    {
+        personalTimer += Time.fixedDeltaTime;
+        personalTimer = Mathf.Round(personalTimer * 100) / 100;
+        Debug.Log(personalTimer + " " + gameObject.name);
     }
 
     protected float GetPersonalTimer() {
-        return Mathf.Round(personalTimer * 100) / 100;
+        return personalTimer;
     }
 }

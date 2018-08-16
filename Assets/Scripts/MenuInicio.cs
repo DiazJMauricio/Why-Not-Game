@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class MenuInicio : MonoBehaviour {
 
     public void NuevaPartida() {
-        SceneManager.LoadScene("main");
+        SceneManager.LoadScene("pruebas nueva version");
     }
 
     public void Continuar() {
-        SceneManager.LoadScene("main");
+        SceneManager.LoadScene("pruebas nueva version");
     }
 
     public void Opciones() {

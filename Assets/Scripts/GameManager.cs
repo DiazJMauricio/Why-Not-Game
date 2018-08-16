@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour {
         Timing.RunCoroutine(_StarFase(faseActual));
     }
     public void EndGame() {
-        GameObject player = FindObjectOfType<playerMov>().gameObject;
+        GameObject player = FindObjectOfType<PlayerMoveManager>().gameObject;
         Timing.RunCoroutine(_DespedirPlayer(player));
         uIManager.MostrarWinPanel();
         lvRun = false;

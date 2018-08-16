@@ -16,8 +16,12 @@ public class UIManager : MonoBehaviour {
     public GameObject gameOver;
     public GameObject winPanel;
 
+    ManagerGame managerGame;
+
     void Awake()
     {
+        managerGame = FindObjectOfType<ManagerGame>();
+
         barraEnergiaEmpty.color = Style.GetColor(Style.barraEnergiaEmpty);
         barraEnergia.color = Style.GetColor(Style.barraEnergiaFull);
         barraEnergiaWidthfull = barraEnergiaEmpty.rectTransform.sizeDelta.x;
@@ -29,6 +33,10 @@ public class UIManager : MonoBehaviour {
         pausaPanel.SetActive(false);
         gameOver.SetActive(false);
         winPanel.SetActive(false);
+
+        managerGame.LevelStart += MostrarCartelLv;
+        managerGame.LevelWin += MostrarWinPanel;
+        managerGame.LevelLose += MostrarGameOver;
     }
 
     public void MostrarCartelLv() {

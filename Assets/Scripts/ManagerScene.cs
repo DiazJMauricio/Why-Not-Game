@@ -3,12 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class ManagerScene : MonoBehaviour {
 
-    public string siguienteEscene;
-    
-    public void SiguienteEscena() {
-        SceneManager.LoadScene(siguienteEscene);
+    public string siguienteEscena;
+    private void Awake()
+    {
+        ManagerGame mg = FindObjectOfType<ManagerGame>();
+        mg.LevelOver += SiguienteEscena;
     }
-    public void RestarScena() {
+
+    public void SiguienteEscena() {
+        SceneManager.LoadScene(siguienteEscena);
+    }
+    public void ReiniciarScena() {
         Scene escenaActual = SceneManager.GetActiveScene();
         SceneManager.LoadScene(escenaActual.name);
     }

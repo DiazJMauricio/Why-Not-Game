@@ -6,11 +6,25 @@ public class ManagerGame : MonoBehaviour {
 
 
     public static bool inPausa;
+    public static bool gameOver;
     private UIManager uiManager;
 
+    public delegate void OnLevelChange();
+    public event OnLevelChange LevelIntro;
+    public event OnLevelChange LevelStart;
+    public event OnLevelChange LevelWin;
+    public event OnLevelChange LevelLose;
+    public event OnLevelChange LevelOver;
 
     private void Awake() {
+        inPausa = false;
+        gameOver = false;
+        Time.timeScale = 1;
+
         uiManager = FindObjectOfType<UIManager>();
+
+        LevelIntro();
+        Invoke("StartGame", 5f);
     }
 
 	// Update is called once per frame
@@ -27,12 +41,8 @@ public class ManagerGame : MonoBehaviour {
     }
 
     public void StartGame()
-    {/*
-        lvRun = true;
-        Timing.RunCoroutine(_StarFase(faseActual));
-        faseActual++;
-        Timing.RunCoroutine(_StarFase(faseActual));*/
-
+    {
+        LevelStart();
     }
 
     public void Pause()
@@ -50,17 +60,21 @@ public class ManagerGame : MonoBehaviour {
     }
 
     public void GameOver()
-    {/*
-        if (!lvEnd)
+    {
+        if (!gameOver)
         {
-            uIManager.MostrarGameOver();
-            lvRun = false;
-            lvEnd = true;
+            LevelLose();
+            gameOver = true;
             Time.timeScale = 0;
-            pause = true;
-        }*/
+            inPausa = true;
+        }
     }
     public void WinGame() {
+        LevelWin();
+        Invoke("OverLevel", 5);
+    }
 
+    public void OverLevel() {
+        LevelOver();
     }
 }

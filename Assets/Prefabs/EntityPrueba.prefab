@@ -24,9 +24,11 @@ GameObject:
   - component: {fileID: 114052336550710114}
   - component: {fileID: 114367853410142678}
   - component: {fileID: 114183336273170344}
+  - component: {fileID: 114393025188144786}
+  - component: {fileID: 61924253745578326}
   m_Layer: 0
   m_Name: EntityPrueba
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +46,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &61924253745578326
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234179794254122}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0.16666667, z: 0, w: 0.16666667}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.6666667, y: 0.6666667}
+    newSize: {x: 0.6666667, y: 0.6666667}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.61, y: 0.34}
+  m_EdgeRadius: 0
 --- !u!114 &114052336550710114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,7 +119,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931764070a5463745ac39ddb4d480fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1533678171315838, guid: abef0716ab848cb41ad6ca2398b69dca, type: 2}
+  bullet: {fileID: 1810139630688698, guid: b1deee1640af5414e855b7b1b25e0c9a, type: 2}
+--- !u!114 &114393025188144786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234179794254122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cede68a8007fb544b7e75cb0a511171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cantDrop: 3
+  drop: {fileID: 1862698213725290, guid: e3fad27b679d39f4c8dd9148f6bc1894, type: 2}
 --- !u!212 &212411232203852686
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -129,7 +169,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5ca508b45eba3d3449283ad285c8f4d9, type: 3}
-  m_Color: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
+  m_Color: {r: 0.8867924, g: 0.31372374, b: 0.63389045, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

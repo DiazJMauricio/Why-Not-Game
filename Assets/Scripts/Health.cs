@@ -6,8 +6,12 @@ public class Health : MonoBehaviour {
 
     public bool invulnerable;
     public int MaxHealth;
-
     private int actualHealth;
+    
+    public delegate void OnHealthChange();
+    public event OnHealthChange EventOnHit;
+    public event OnHealthChange EventOnDead;
+    public event OnHealthChange EventOnRecovery;
     
 	void Awake () {
         actualHealth = MaxHealth;
@@ -17,20 +21,26 @@ public class Health : MonoBehaviour {
         if (!invulnerable) {
 
             actualHealth += cant;
-            if (cant < 0) {
+            if (cant < 0 && EventOnHit != null) {
                 // Resibir Hit.
+                EventOnHit();
             }
-            if (cant > 0)
+            if (cant > 0 && EventOnRecovery != null)
             {
                 // Resibir Vida.
+                EventOnRecovery();
             }
             if (actualHealth > MaxHealth) actualHealth = MaxHealth;
-
+            if (IsDead() && EventOnDead != null) {
+                EventOnDead();
+            }
         }
     }
 
     public bool IsDead() {
         return actualHealth <= 0;
     }
-
+    public int GetActualHealth() {
+        return actualHealth;
+    }
 }

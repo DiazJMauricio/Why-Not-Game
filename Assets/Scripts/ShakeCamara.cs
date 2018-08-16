@@ -10,13 +10,13 @@ public class ShakeCamara : MonoBehaviour {
         starPosition = transform.position;
     }
 
-    public void _ShakeCamara(float duracion) {
-        StartCoroutine(_Shake(duracion));
+    public void _ShakeCamara(float duracion, float radio) {
+        StartCoroutine(_Shake(duracion,radio));
     }
 
-    IEnumerator _Shake(float time) {
+    IEnumerator _Shake(float time,float radio) {
         for (float i = 0; i <= time; i += Time.fixedDeltaTime) {
-            Vector3 randomPosition = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), -10);
+            Vector3 randomPosition = new Vector3(Random.Range(-radio, radio), Random.Range(-radio, radio), -10);
             transform.position = randomPosition;
             
             if (i == time) {

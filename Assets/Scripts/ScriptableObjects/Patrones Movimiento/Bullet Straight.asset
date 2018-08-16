@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbefcc30e9f44394c9a72fa67d977866, type: 3}
-  m_Name: Disparo simple
+  m_Name: Bullet Straight
   m_EditorClassIdentifier: 
   Movimientos:
   - tipoMovimiento: 3
     duracion: 30
     vectorDireccion: {x: 0, y: 0, z: 0}
-    velocidad: 10
+    velocidad: 15
