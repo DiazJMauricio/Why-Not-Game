@@ -20,11 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4684787879929068}
   - component: {fileID: 212411232203852686}
-  - component: {fileID: 114323549195339440}
-  - component: {fileID: 114052336550710114}
-  - component: {fileID: 114367853410142678}
   - component: {fileID: 114183336273170344}
+  - component: {fileID: 114323549195339440}
+  - component: {fileID: 114006058625555194}
+  - component: {fileID: 114658470834012340}
   - component: {fileID: 114393025188144786}
+  - component: {fileID: 114014332154494532}
   - component: {fileID: 61924253745578326}
   m_Layer: 0
   m_Name: EntityPrueba
@@ -71,7 +72,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.61, y: 0.34}
   m_EdgeRadius: 0
---- !u!114 &114052336550710114
+--- !u!114 &114006058625555194
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,11 +80,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234179794254122}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74cb80dc790f3b84bb94f88d7ef633e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 07b88b846364af342b0bfe6ae396adc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patronMovimiento: {fileID: 11400000, guid: 31a387fe7318ae442a97d33a560a7fc8, type: 2}
+  pattern: {fileID: 11400000, guid: 478ac9ed8e216e74cbc2a6686fb36aa9, type: 2}
+  gizmosColor: {r: 1, g: 0.0141509175, b: 0.0141509175, a: 0.65882355}
+  bucle: 0
   inversion: {x: 1, y: 1}
+  DebugTime: 0
+  watchGizmos: 1
+--- !u!114 &114014332154494532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234179794254122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fc498478ade364e8e92f42eda37f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 30
 --- !u!114 &114183336273170344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,18 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invulnerable: 0
   MaxHealth: 3
---- !u!114 &114367853410142678
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1234179794254122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931764070a5463745ac39ddb4d480fd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 1810139630688698, guid: b1deee1640af5414e855b7b1b25e0c9a, type: 2}
 --- !u!114 &114393025188144786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,6 +138,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cantDrop: 3
   drop: {fileID: 1862698213725290, guid: e3fad27b679d39f4c8dd9148f6bc1894, type: 2}
+--- !u!114 &114658470834012340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234179794254122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df22cb0eeb9edd489b1fdb4591454f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletShoot: {fileID: 1810139630688698, guid: b1deee1640af5414e855b7b1b25e0c9a,
+    type: 2}
 --- !u!212 &212411232203852686
 SpriteRenderer:
   m_ObjectHideFlags: 1

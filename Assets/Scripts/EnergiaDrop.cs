@@ -39,10 +39,8 @@ public class EnergiaDrop : MonoBehaviour {
 
             DarEnergiaAPlayerYDestruir(playerPosition);
 
-            
             transform.position += playerDirection * (velocidad + (5-distancia)) * Time.fixedDeltaTime;
         }
-       
     }
 
 

@@ -5,14 +5,14 @@ using UnityEngine;
 //  Todas las IEntity son instancias de la Fase de un nivel.
 public class Entity : MonoBehaviour {
     public Health miHealth                      { get; set; }
-    public MoveWithPattern MoveWithP            { get; set; }
+    public EntityMove entityMove            { get; set; }
     public int NumeroDeLaFasePerteneciente      { get; set; }
     private ManagerLevel LevelManager           { get; set; }
 
 
     protected virtual void Awake ()
     {
-        MoveWithP = GetComponent<MoveWithPattern>();
+        entityMove = GetComponent<EntityMove>();
         miHealth = GetComponent<Health>();
         LevelManager = FindObjectOfType<ManagerLevel>();
         NumeroDeLaFasePerteneciente = 0;
@@ -21,7 +21,7 @@ public class Entity : MonoBehaviour {
     protected virtual void Update ()
     {
         //  El objeto sale de la escena.
-        if (MoveWithP.FueraDeCuadro())  KillThisObject();
+        if (entityMove.FueraDeCuadro())  KillThisObject();
 
         //  El objeto fue Eliminado por el player.
         else if (miHealth.IsDead())    DeadByHealth();

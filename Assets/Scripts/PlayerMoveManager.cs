@@ -35,7 +35,7 @@ public class PlayerMoveManager : MonoBehaviour {
             Mover(direction);
 
             // Dash
-            if (Input.GetButtonDown("Dash"))
+            if (Input.GetButtonDown("Dash") && ManagerGame.onGame)
             {
                 StartCoroutine(Dash());
             }
@@ -114,7 +114,7 @@ public class PlayerMoveManager : MonoBehaviour {
         encerrar = false;
         yield return new WaitForSeconds(1f);
         Vector3 centerPos = new Vector3(10, 0, 0);
-        for (float i = 0; i < 15; i += Time.fixedDeltaTime)
+        for (float i = 0; i < 15; i += Time.deltaTime)
         {
             transform.position = Vector3.MoveTowards(transform.position, centerPos, 5 * Time.deltaTime);
             yield return null;

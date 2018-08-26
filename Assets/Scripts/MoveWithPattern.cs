@@ -4,8 +4,11 @@ using UnityEngine;
 
 //v_0.0.2
 //  Hacer que funcione independientemente
-public class MoveWithPattern : Timer {
+//  RETOCARLO PARA QUE FUNCIONE PARA PROYECTILES.
+public class MoveWithPattern : MonoBehaviour
+{
 
+   
     public PatronMovimiento patronMovimiento;       //  <- Lista de movimientos y cuando ejecutarlos.
     public Vector2 inversion = new Vector2(1, 1);   //  <- Cambia el lugar de inicio del objeto y su relacion de movimiento. 
 
@@ -16,6 +19,7 @@ public class MoveWithPattern : Timer {
     private Vector3 playerPosition;                 //  <- Posicion del objeto Player.
     private int movimientoActual = 0;
     private List<float> cambiosDeMovimiento = new List<float>();
+    private float Timer;
 
 
     private void Awake ()
@@ -23,7 +27,7 @@ public class MoveWithPattern : Timer {
         if (patronMovimiento == null)  Debug.LogError("El Objeto " + gameObject.name + " no tiene instanciado un Patron de movimiento");
 
         
-        SetSecondOnTimer(0f);
+        Timer = 0f;
     }
     private void Start()
     {
@@ -31,11 +35,11 @@ public class MoveWithPattern : Timer {
     }
 
     void Update () {
-        
         if (!ManagerGame.inPausa) {
+            Timer += Time.deltaTime;
             //  Patron de Movimiento.
             MoveManager();
-            UpdateTimer();
+            
             if (GetComponent<Entity>() == null)
             {
                 if (FueraDeCuadro())
@@ -74,15 +78,14 @@ public class MoveWithPattern : Timer {
 
 
 
-
-
     //  Interpreta el patron de movimiento.
     public void MoveManager()
     {
         //  Investiga que movimiento del patronDeMovimiento es el movimiento actual.
         for (int i = movimientoActual; i < cambiosDeMovimiento.Count - 1; i++)
         {
-            if (cambiosDeMovimiento[i] == GetPersonalTimer())
+            float m = Mathf.Round(cambiosDeMovimiento[i] * 100) / 100;
+            if (m == Mathf.Round(Timer * 100) / 100)
             {
                 movimientoActual = i;
                 break;
@@ -92,18 +95,18 @@ public class MoveWithPattern : Timer {
         switch (patronMovimiento.Movimientos[movimientoActual].tipoMovimiento)
         {
             case Movimiento.TipoMovimiento.Vectorial:
-                nextPosition += patronMovimiento.Movimientos[movimientoActual].vectorDireccion * Time.fixedDeltaTime;
+                nextPosition += patronMovimiento.Movimientos[movimientoActual].vectorDireccion * Time.deltaTime;
                 break;
             case Movimiento.TipoMovimiento.Arco:
                 break;
             case Movimiento.TipoMovimiento.toPosition:
-                nextPosition = Vector3.MoveTowards(nextPosition, patronMovimiento.Movimientos[movimientoActual].vectorDireccion, patronMovimiento.Movimientos[movimientoActual].velocidad * Time.fixedDeltaTime);
+                nextPosition = Vector3.MoveTowards(nextPosition, patronMovimiento.Movimientos[movimientoActual].vectorDireccion, patronMovimiento.Movimientos[movimientoActual].velocidad * Time.deltaTime);
                 break;
             case Movimiento.TipoMovimiento.DireccionAlPlayer:
-                nextPosition += playerDirection * patronMovimiento.Movimientos[movimientoActual].velocidad * Time.fixedDeltaTime;
+                nextPosition += playerDirection * patronMovimiento.Movimientos[movimientoActual].velocidad * Time.deltaTime;
                 break;
             case Movimiento.TipoMovimiento.Derecha:
-                nextPosition += transform.right * patronMovimiento.Movimientos[movimientoActual].velocidad * Time.fixedDeltaTime;
+                nextPosition += transform.right * patronMovimiento.Movimientos[movimientoActual].velocidad * Time.deltaTime;
                 break;
             default:
                 break;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Bullet Straight
   m_EditorClassIdentifier: 
   Movimientos:
-  - tipoMovimiento: 3
+  - tipoMovimiento: 4
     duracion: 30
     vectorDireccion: {x: 0, y: 0, z: 0}
     velocidad: 15

@@ -20,18 +20,58 @@ MonoBehaviour:
       Yinvert: 1
     - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
         type: 2}
-      waitForSecons: 0
-      Xinvert: -1
+      waitForSecons: 0.2
+      Xinvert: 1
+      Yinvert: 1
+    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
+        type: 2}
+      waitForSecons: 0.2
+      Xinvert: 1
+      Yinvert: 1
+    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
+        type: 2}
+      waitForSecons: 0.2
+      Xinvert: 1
       Yinvert: 1
   - instanciaDeFase:
     - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
         type: 2}
       waitForSecons: 0
-      Xinvert: 1
+      Xinvert: -1
+      Yinvert: -1
+    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
+        type: 2}
+      waitForSecons: 0.2
+      Xinvert: -1
+      Yinvert: -1
+    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
+        type: 2}
+      waitForSecons: 0.2
+      Xinvert: -1
+      Yinvert: -1
+    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
+        type: 2}
+      waitForSecons: 0.2
+      Xinvert: -1
       Yinvert: -1
   - instanciaDeFase:
     - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
         type: 2}
-      waitForSecons: 0.4
+      waitForSecons: 0
       Xinvert: 1
-      Yinvert: -1
+      Yinvert: 1
+    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
+        type: 2}
+      waitForSecons: 0.2
+      Xinvert: 1
+      Yinvert: 1
+    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
+        type: 2}
+      waitForSecons: 0.2
+      Xinvert: 1
+      Yinvert: 1
+    - entity: {fileID: 114183336273170344, guid: 932f64eba9706b24d88d5e613e242b05,
+        type: 2}
+      waitForSecons: 0.2
+      Xinvert: 1
+      Yinvert: 1

@@ -7,20 +7,23 @@ public class ManagerLevel : MonoBehaviour {
     public Nivel LevelSettins;
 
     static int faseActual;
-    static List<int> controlDeInstanciaDeNivel = new List<int>();
+    static List<int> controlDeInstanciaDeNivel;
     ManagerGame gameManager;
+    bool lvWin;
     
 
     void Awake () {
+        
         if (LevelSettins == null) Debug.LogError("Nivel no ingresado");
-
-        faseActual = 0;
+        controlDeInstanciaDeNivel = new List<int>();
         CotroladorDeFase();
         gameManager = GetComponent<ManagerGame>();
     }
 
     private void Start()
     {
+        lvWin = false;
+        faseActual = 0;
         gameManager.LevelStart += StartLevel;
     }
 
@@ -57,52 +60,43 @@ public class ManagerLevel : MonoBehaviour {
         }
         else
         {
-            Debug.Log("You win");
-            gameManager.WinGame();
+            if (!lvWin)
+            {
+                Debug.Log("You win");
+                lvWin = true;
+                gameManager.WinGame();
+            }
         }
     }
 
     public void InstanciarEntity(Entity entity, int nDeInstancia, Vector2 invert)
     {
         GameObject Entity = Instantiate(entity).gameObject;
-        Entity.GetComponent<Entity>().MoveWithP.inversion = invert;
+        Entity.GetComponent<Entity>().entityMove.inversion = invert;
         Entity.GetComponent<Entity>().NumeroDeLaFasePerteneciente = nDeInstancia;
     }
-
+    
 
     //  Inicializa una Fase
     IEnumerator _StarFase(int fase)
     {
-        float duracionDeFase = 0.1f;
-        float segundo = 0f;
-        for (int i = 0; i < LevelSettins.fasesDelNivel[fase].instanciaDeFase.Count; i++)
+        for (int instancia = 0; instancia < LevelSettins.fasesDelNivel[fase].instanciaDeFase.Count; instancia++)
         {
-            duracionDeFase += LevelSettins.fasesDelNivel[fase].instanciaDeFase[i].waitForSecons;
-        }
 
-        while (segundo < duracionDeFase)
-        {
-            if (!ManagerGame.inPausa)
-            {
-                float segundoDeInstancia = 0;
-                for (int instancia = 0; instancia < LevelSettins.fasesDelNivel[fase].instanciaDeFase.Count; instancia++)
-                {
-                    segundoDeInstancia += LevelSettins.fasesDelNivel[fase].instanciaDeFase[instancia].waitForSecons;
+            yield return new WaitForSeconds(LevelSettins.fasesDelNivel[fase].instanciaDeFase[instancia].waitForSecons);
 
-                    if (Mathf.Round(segundo * 100) / 100 == Mathf.Round(segundoDeInstancia * 100) / 100)
-                    {
-                        float inverX = LevelSettins.fasesDelNivel[fase].instanciaDeFase[instancia].Xinvert;
-                        float inverY = LevelSettins.fasesDelNivel[fase].instanciaDeFase[instancia].Yinvert;
 
-                        Vector2 inversion = new Vector2(inverX, inverY);
-                        Entity entity = LevelSettins.fasesDelNivel[fase].instanciaDeFase[instancia].entity;
+            float inverX = LevelSettins.fasesDelNivel[fase].instanciaDeFase[instancia].Xinvert;
+            float inverY = LevelSettins.fasesDelNivel[fase].instanciaDeFase[instancia].Yinvert;
 
-                        InstanciarEntity(entity, fase, inversion);
-                    }
-                }
-                segundo += Time.fixedDeltaTime;
-            }
-            yield return null;
+            Vector2 inversion = new Vector2(inverX, inverY);
+            Entity entity = LevelSettins.fasesDelNivel[fase].instanciaDeFase[instancia].entity;
+
+            InstanciarEntity(entity, fase, inversion);
+
         }
     }
+
+        
+    
 }

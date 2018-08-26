@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Hit() {
         uiManager.ActualizarVidas(health.GetActualHealth());
+        ManagerScore.damageScore -= 1000;
         StartCoroutine("_Hit");
     }
     public void Dead()

@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Movimiento {
 
-    public enum TipoMovimiento {Vectorial, Arco , DireccionAlPlayer, Derecha, toPosition};
+    public enum TipoMovimiento { toPosition, Vectorial, Arco , DireccionAlPlayer, Derecha };
     public TipoMovimiento tipoMovimiento;
 
     public float duracion;

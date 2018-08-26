@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Disparo A Player
   m_EditorClassIdentifier: 
   Movimientos:
-  - tipoMovimiento: 2
+  - tipoMovimiento: 3
     duracion: 20
     vectorDireccion: {x: 0, y: 0, z: 0}
     velocidad: 4

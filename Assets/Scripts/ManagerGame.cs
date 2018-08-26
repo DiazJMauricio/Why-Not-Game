@@ -6,6 +6,7 @@ public class ManagerGame : MonoBehaviour {
 
 
     public static bool inPausa;
+    public static bool onGame;
     public static bool gameOver;
     private UIManager uiManager;
 
@@ -19,16 +20,19 @@ public class ManagerGame : MonoBehaviour {
     private void Awake() {
         inPausa = false;
         gameOver = false;
+        onGame = false;
         Time.timeScale = 1;
 
         uiManager = FindObjectOfType<UIManager>();
-
+    }
+    private void Start()
+    {
         LevelIntro();
         Invoke("StartGame", 5f);
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update ()
     {
         // mover a Manager Input.
         if (Input.GetButtonDown("pause"))
@@ -43,6 +47,7 @@ public class ManagerGame : MonoBehaviour {
     public void StartGame()
     {
         LevelStart();
+        onGame = true;
     }
 
     public void Pause()
@@ -71,6 +76,7 @@ public class ManagerGame : MonoBehaviour {
     }
     public void WinGame() {
         LevelWin();
+        onGame = false;
         Invoke("OverLevel", 5);
     }
 
