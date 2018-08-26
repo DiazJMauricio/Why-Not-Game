@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour {
 
     public GameObject CartelLv;
     public GameObject pausaPanel;
+    public GameObject optionPanel;
     public GameObject gameOver;
     public GameObject winPanel;
 
@@ -38,12 +39,18 @@ public class UIManager : MonoBehaviour {
         managerGame.LevelWin += MostrarWinPanel;
         managerGame.LevelLose += MostrarGameOver;
     }
+    public void ShowOptions() {
+        optionPanel.SetActive(true);
+    }
 
     public void MostrarCartelLv() {
         CartelLv.SetActive(!CartelLv.activeInHierarchy);
     }
     public void MostrarPausaPanel() {
         pausaPanel.SetActive(!pausaPanel.activeInHierarchy);
+        if (!pausaPanel.activeInHierarchy && optionPanel.activeInHierarchy) {
+            optionPanel.SetActive(false);
+        }
     }
     public void MostrarGameOver()
     {

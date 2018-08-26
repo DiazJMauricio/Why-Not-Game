@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuInicio : MonoBehaviour {
+    public GameObject panelOpciones;
 
     public void NuevaPartida() {
         SceneManager.LoadScene("pruebas nueva version");
@@ -14,7 +15,7 @@ public class MenuInicio : MonoBehaviour {
     }
 
     public void Opciones() {
-
+        panelOpciones.SetActive(true);
     }
     public void Arcade() {
 
